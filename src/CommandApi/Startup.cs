@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Npgsql;
+using AutoMapper;
 
 namespace CommandApi
 {
@@ -31,8 +32,9 @@ namespace CommandApi
             builder.Password = Configuration["Password"];
 
             services.AddDbContext<CommandContext>(opt => opt.UseNpgsql(builder.ConnectionString));
-            services.AddScoped<ICommandRepo, SqlCommandRepo>();
             services.AddControllers();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<ICommandRepo, SqlCommandRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
