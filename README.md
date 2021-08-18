@@ -19,3 +19,69 @@ insert into "CommandItems" ("HowTo", "Platform", "CommandLine")values ('Create a
 insert into "CommandItems" ("HowTo", "Platform", "CommandLine")VALUES ('Apply Migrations to DB', 'Entity Framework Package Manager Console','update database');
 
 ```
+
+
+### Want to do this by yourselves ? Steps outlined below:
+
+#### Creating .NET Core Api Project
+
+ ```
+ //Create empty web project
+  dotnet new web -n ProjectName
+ 
+ //Create an xunit project
+ dotnet new xunit -n ProjectName.Tests
+ 
+ //create a solution
+ dotnet new sln --name SolutionName
+ 
+ //Add both projects to solution
+ dotnet sln SolutionName.sln add src/ProjectFolder/ProjectName.csproj test/ProjectName.Tests/ProjectName.Tests.csproj 
+ 
+ //Add reference of the main project to the xunit test project
+ dotnet add test/ProjectName.Tests/ProjectName.Tests.csproj reference src/ProjectName/ProjectName.csproj 
+ 
+ //Ensure everything works
+ dotnet build
+ 
+ ```
+ 
+ #### Dependancy Injection 
+ 
+ `Startup.cs`
+ ```
+     AddTransient: Create service per request
+     Add Scoped : Create service per client
+     AddSingleton: Created once and reused.
+ ```
+ 
+ `Entity Framework Core`
+ 
+ ```
+     //To Check if EF Core Tools installed
+     dotnet ef
+     //To Install EF Tools gloablly
+     dotnet tool install --global dotnet-ef
+
+    //Install EF Core package
+    dotnet add package Microsoft.EntityFrameworkCore
+    
+    dotnet add package Microsoft.EntityFrameworkCore.Design
+    //Database specific
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+
+//Create migrations
+dotnet ef migrations add InitialMigration
+
+//Apply changes to the DB
+dotnet ef database update
+
+
+dotnet ef migrations add
+
+
+
+ ```
+ 
+` Secrets Management`
+```dotnet user-secrets set "UserId" "cmddbuser```
