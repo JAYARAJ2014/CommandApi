@@ -4,11 +4,15 @@ This contains basics like setting up Dependancy Injection, Creating Controllers,
 ### Cloning
 `git clone https://github.com/JAYARAJ2014/CommandApi.git`
 
-### Restoring
 
-### Seeding Data
+#### Instantiating DB From Docker 
+`docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres`
 
-#### Execute the following SQL while setting up the data.
+#### Create User
+`create user cmddbuser with encrypted password 'asd313!' createdb;`
+
+
+### Seeding Data () Execute the following SQL while setting up the data.)
 ```
 insert into "CommandItems" ("HowTo", "Platform", "CommandLine")values ('Create an EF migration', 'Entity Framework Core Command Line','dotnet ef migrations add');
 
