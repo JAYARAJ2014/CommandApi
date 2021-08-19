@@ -61,16 +61,14 @@ namespace CommandApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
-        public ActionResult<CommandReadDto> Update(CommandUpdateDto updateDto)
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
         {
 
-            var cmdFromRepo = _repo.GetById(updateDto.Id);
+            var cmdFromRepo = _repo.GetById(id);
             if (cmdFromRepo == null)
                 return NotFound();
-
-            _mapper.Map(updateDto, cmdFromRepo);
-            _repo.Update(cmdFromRepo);
+            _repo.Delete(cmdFromRepo);
             _repo.SaveChanges();
             return NoContent();
         }
