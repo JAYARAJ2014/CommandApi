@@ -6,6 +6,7 @@ This contains basics like setting up Dependancy Injection, Creating Controllers,
 
 
 #### Instantiating DB From Docker 
+
 `docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres`
 
 #### Create User
