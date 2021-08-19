@@ -26,14 +26,53 @@ namespace CommandApi.Controllers
             return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(cmdItems));
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<Command> Get(int id)
+        [HttpGet("{id}", Name = "GetById")]
+        public ActionResult<Command> GetById(int id)
         {
             var cmd = _repo.GetById(id);
             if (cmd == null)
                 return NotFound();
 
             return Ok(_mapper.Map<CommandReadDto>(cmd));
+        }
+
+        [HttpPost]
+        public ActionResult<CommandCreateDto> Create(CommandCreateDto dto)
+        {
+            var model = _mapper.Map<Command>(dto);
+            _repo.Create(model);
+            _repo.SaveChanges();
+
+            var readDto = _mapper.Map<CommandReadDto>(model);
+            return CreatedAtRoute(nameof(GetById), new { Id = readDto.Id }, readDto);
+        }
+
+        [HttpPut]
+        public ActionResult Update(CommandUpdateDto updateDto)
+        {
+
+            var cmdFromRepo = _repo.GetById(updateDto.Id);
+            if (cmdFromRepo == null)
+                return NotFound();
+
+            _mapper.Map(updateDto, cmdFromRepo);
+            _repo.Update(cmdFromRepo);
+            _repo.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public ActionResult<CommandReadDto> Update(CommandUpdateDto updateDto)
+        {
+
+            var cmdFromRepo = _repo.GetById(updateDto.Id);
+            if (cmdFromRepo == null)
+                return NotFound();
+
+            _mapper.Map(updateDto, cmdFromRepo);
+            _repo.Update(cmdFromRepo);
+            _repo.SaveChanges();
+            return NoContent();
         }
     }
 
