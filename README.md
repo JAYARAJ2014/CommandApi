@@ -1,6 +1,6 @@
 ## Command API
 Its a very simple REST API project that uses Postgres as backend andusing .NET core 5.0 (Uses EF Core 5.0 as well)
-This contains basics like setting up Dependancy Injection, Creating Controllers, Routes, Models , Data Transfer Objects and Mapping between them.
+This contains basics like setting up Dependancy Injection, Creating Controllers, Routes, Models , Data Transfer Objects and Mapping between them using automapperS.
 ### Cloning
 `git clone https://github.com/JAYARAJ2014/CommandApi.git`
 
