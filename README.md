@@ -90,3 +90,6 @@ dotnet ef migrations add
  
 ` Secrets Management`
 ```dotnet user-secrets set "UserId" "cmddbuser```
+
+
+/* Azure pipeline introduced More details will appear here later */
